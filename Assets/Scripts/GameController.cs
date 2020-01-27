@@ -26,6 +26,7 @@ public class GameController : MonoBehaviour
 
     public Text scoreText;
     public Paddle paddle;
+    public GameObject floor;
     public int levelNumber = 1;
 
     private int currentScore = 0;

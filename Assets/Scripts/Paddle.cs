@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(SpriteRenderer))]
+[RequireComponent(typeof(BoxCollider2D))]
 public class Paddle : MonoBehaviour
 {
     public float width = 5.0f;
@@ -34,11 +36,9 @@ public class Paddle : MonoBehaviour
         {
             return;
         }
+
         ballSpriteChild.SetActive(false);
-        Instantiate(
-            ballPrefab,
-            ballSpriteChild.transform.position,
-            Quaternion.identity);
+        Instantiate(ballPrefab, ballSpriteChild.transform.position, Quaternion.identity);
     }
 
     public void Reset()

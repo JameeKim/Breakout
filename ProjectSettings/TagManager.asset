@@ -17,7 +17,7 @@ TagManager:
   - Paddle
   - Bricks
   - Wall
-  - 
+  - PowerUp
   - 
   - 
   - 
@@ -38,6 +38,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3395563505
+    locked: 0
   - name: Default
     uniqueID: 0
     locked: 0

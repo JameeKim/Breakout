@@ -1,6 +1,7 @@
 using UnityEngine;
 using Random = UnityEngine.Random;
 
+[RequireComponent(typeof(Rigidbody2D))]
 public class Ball : MonoBehaviour
 {
     public float moveSpeed = 10.0f;
