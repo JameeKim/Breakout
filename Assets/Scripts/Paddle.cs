@@ -37,7 +37,6 @@ public class Paddle : MonoBehaviour
     private void Start()
     {
         originalWidth = width;
-        ApplySize();
         Reset();
     }
 
@@ -67,6 +66,9 @@ public class Paddle : MonoBehaviour
         newPosition.x = 0.0f;
         cachedTransform.localPosition = newPosition;
         SetLaserShooter(null);
+        if (currentWidthReturnCoroutine != null)
+            StopCoroutine(currentWidthReturnCoroutine);
+        ResetSize();
     }
 
     public void ResetWidthAfter(float duration)
@@ -80,10 +82,15 @@ public class Paddle : MonoBehaviour
     private IEnumerator ReturnWidthCoroutine(float duration)
     {
         yield return new WaitForSeconds(duration);
-        width = originalWidth;
-        ApplySize();
+        ResetSize();
         GameController.Instance.powerUpSounds.PlayOneShot(shrinkSound);
         currentWidthReturnCoroutine = null;
+    }
+
+    private void ResetSize()
+    {
+        width = originalWidth;
+        ApplySize();
     }
 
     public void SetLaserShooter(LaserShooter shooter)

@@ -22,10 +22,6 @@ MonoBehaviour:
   - color: {r: 0.734247, g: 0.92165494, b: 0.9433962, a: 1}
     impactAudios:
     - {fileID: 8300000, guid: ce564169da0eb7b4bb87083dc4edfb38, type: 3}
-    - {fileID: 8300000, guid: cf80d422b8106ee4c914370753f5f659, type: 3}
-    - {fileID: 8300000, guid: fb513f2c3ea9af74686810b789c801cd, type: 3}
-    - {fileID: 8300000, guid: 38a9b5e67317a6e4c945029a2f212993, type: 3}
-    - {fileID: 8300000, guid: f62506299fa5fb94b987c029f415ae95, type: 3}
   - color: {r: 0.5471698, g: 0.1742234, b: 0, a: 1}
     impactAudios:
     - {fileID: 8300000, guid: 6259fb5ccc1f23a4daf59f8986f0c136, type: 3}

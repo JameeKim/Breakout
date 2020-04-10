@@ -8,6 +8,8 @@ public class Brick : MonoBehaviour
     [Min(1)]
     public int maxHealth = 1;
 
+    private static int currentNumber;
+
     private SpriteRenderer spriteRenderer;
     private int currentHealth;
 
@@ -27,6 +29,11 @@ public class Brick : MonoBehaviour
         CurrentHealth = maxHealth;
     }
 
+    private void Start()
+    {
+        currentNumber++;
+    }
+
     private void OnCollisionEnter2D(Collision2D other)
     {
         AudioClip sound;
@@ -42,9 +49,12 @@ public class Brick : MonoBehaviour
             if (settings.RandomPowerUpByChance(out GameObject powerUp))
                 Instantiate(powerUp, transform.position, Quaternion.identity);
             GameController.Instance.IncrementScore();
+            currentNumber--;
             Destroy(gameObject);
         }
 
         GameController.Instance.brickSounds.PlayOneShot(sound);
+        if (currentNumber == 0)
+            GameController.Instance.GoToNextLevel();
     }
 }

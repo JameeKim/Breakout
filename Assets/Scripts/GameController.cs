@@ -31,6 +31,7 @@ public class GameController : MonoBehaviour
     public GameObject laserCountUI;
     public Text laserCountText;
     public int levelNumber = 1;
+    public int maxLevelNumber = 3;
 
     [Header("Sound")]
     public AudioSource brickSounds;
@@ -41,7 +42,9 @@ public class GameController : MonoBehaviour
 
     public AudioSource miscSounds;
 
+    private int startScore;
     private int currentScore;
+    private bool gameWon;
 
     private BallManager ballManager;
 
@@ -56,7 +59,6 @@ public class GameController : MonoBehaviour
         instance = this;
 
         ballManager = GetComponent<BallManager>();
-        ballManager.onGameOver.AddListener(GameOver);
     }
 
     private void Start()
@@ -73,18 +75,37 @@ public class GameController : MonoBehaviour
         scoreText.text = currentScore.ToString();
     }
 
-    public void GameOver()
+    public void GameOver(bool resetScore = true)
     {
+        if (gameWon)
+            return;
+
         StartCoroutine(nameof(ReloadLevel));
-        ResetScore();
+        if (resetScore)
+            ResetScore();
+        ballManager.ResetBalls();
+        paddle.Reset();
+    }
+
+    public void GoToNextLevel()
+    {
+        if (levelNumber >= maxLevelNumber)
+        {
+            gameWon = true;
+            Debug.Log("Finished the game");
+            return;
+        }
+
+        startScore = currentScore;
+        StartCoroutine(LoadNextLevel());
         ballManager.ResetBalls();
         paddle.Reset();
     }
 
     private void ResetScore()
     {
-        currentScore = 0;
-        scoreText.text = "0";
+        currentScore = startScore;
+        scoreText.text = currentScore.ToString();
     }
 
     private IEnumerator LoadLevel()
@@ -101,7 +122,16 @@ public class GameController : MonoBehaviour
         AsyncOperation unloading = SceneManager.UnloadSceneAsync(levelNumber);
         while (!unloading.isDone)
             yield return null;
+        yield return LoadLevel();
+    }
 
+    private IEnumerator LoadNextLevel()
+    {
+        SceneManager.SetActiveScene(SceneManager.GetSceneByBuildIndex(0));
+        AsyncOperation unloading = SceneManager.UnloadSceneAsync(levelNumber);
+        while (!unloading.isDone)
+            yield return null;
+        levelNumber++;
         yield return LoadLevel();
     }
 
