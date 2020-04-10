@@ -27,11 +27,11 @@ public class GameController : MonoBehaviour
 
     public Text scoreText;
     public Paddle paddle;
-    public GameObject floor;
     public GameObject laserCountUI;
     public Text laserCountText;
     public int levelNumber = 1;
     public int maxLevelNumber = 3;
+    public GameObject youWonUI;
 
     [Header("Sound")]
     public AudioSource brickSounds;
@@ -92,7 +92,7 @@ public class GameController : MonoBehaviour
         if (levelNumber >= maxLevelNumber)
         {
             gameWon = true;
-            Debug.Log("Finished the game");
+            youWonUI.SetActive(true);
             return;
         }
 
