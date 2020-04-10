@@ -12,6 +12,10 @@ public class Paddle : MonoBehaviour
     public AudioClip ballShootSound;
 
     [Header("PowerUp - Grow")]
+    public GrowTimeUI growTimeUI;
+
+    public GameObject growTimeUIGameObject;
+
     public AudioClip growSound;
 
     public AudioClip shrinkSound;
@@ -68,10 +72,20 @@ public class Paddle : MonoBehaviour
         SetLaserShooter(null);
         if (currentWidthReturnCoroutine != null)
             StopCoroutine(currentWidthReturnCoroutine);
+        growTimeUIGameObject.SetActive(false);
         ResetSize();
     }
 
-    public void ResetWidthAfter(float duration)
+    public void Grow(float multiplier, float duration)
+    {
+        width = originalWidth * multiplier;
+        ApplySize();
+        growTimeUIGameObject.SetActive(true);
+        ResetWidthAfter(duration);
+        GameController.Instance.powerUpSounds.PlayOneShot(growSound);
+    }
+
+    private void ResetWidthAfter(float duration)
     {
         if (currentWidthReturnCoroutine != null)
             StopCoroutine(currentWidthReturnCoroutine);
@@ -81,7 +95,16 @@ public class Paddle : MonoBehaviour
 
     private IEnumerator ReturnWidthCoroutine(float duration)
     {
-        yield return new WaitForSeconds(duration);
+        float time = 0.0f;
+
+        do
+        {
+            growTimeUI.SetBarLength(time / duration);
+            yield return null;
+            time += Time.deltaTime;
+        } while (time < duration);
+
+        growTimeUIGameObject.SetActive(false);
         ResetSize();
         GameController.Instance.powerUpSounds.PlayOneShot(shrinkSound);
         currentWidthReturnCoroutine = null;

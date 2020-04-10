@@ -57,4 +57,9 @@ public class Brick : MonoBehaviour
         if (currentNumber == 0)
             GameController.Instance.GoToNextLevel();
     }
+
+    public static void ResetCount()
+    {
+        currentNumber = 0;
+    }
 }

@@ -80,6 +80,7 @@ public class GameController : MonoBehaviour
         if (gameWon)
             return;
 
+        Brick.ResetCount();
         StartCoroutine(nameof(ReloadLevel));
         if (resetScore)
             ResetScore();
@@ -97,6 +98,7 @@ public class GameController : MonoBehaviour
         }
 
         startScore = currentScore;
+        Brick.ResetCount();
         StartCoroutine(LoadNextLevel());
         ballManager.ResetBalls();
         paddle.Reset();

@@ -124,7 +124,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   speed: 1
   getSound: {fileID: 8300000, guid: e4c1e20d3ea11d040b433188b10acbb0, type: 3}
-  duration: 3
+  duration: 10
 --- !u!1 &8236784204141655909
 GameObject:
   m_ObjectHideFlags: 0
