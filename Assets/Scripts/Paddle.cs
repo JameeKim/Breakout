@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections;
+using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(BoxCollider2D))]
@@ -12,6 +13,11 @@ public class Paddle : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
 
+    private float originalWidth;
+    private Coroutine currentWidthReturnCoroutine;
+
+    public float OriginalWidth => originalWidth;
+
     private void Awake()
     {
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -20,6 +26,7 @@ public class Paddle : MonoBehaviour
 
     private void Start()
     {
+        originalWidth = width;
         ApplySize();
         Reset();
     }
@@ -48,5 +55,21 @@ public class Paddle : MonoBehaviour
         Vector3 newPosition = cachedTransform.localPosition;
         newPosition.x = 0.0f;
         cachedTransform.localPosition = newPosition;
+    }
+
+    public void ResetWidthAfter(float duration)
+    {
+        if (currentWidthReturnCoroutine != null)
+            StopCoroutine(currentWidthReturnCoroutine);
+
+        currentWidthReturnCoroutine = StartCoroutine(ReturnWidthCoroutine(duration));
+    }
+
+    private IEnumerator ReturnWidthCoroutine(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        width = originalWidth;
+        ApplySize();
+        currentWidthReturnCoroutine = null;
     }
 }

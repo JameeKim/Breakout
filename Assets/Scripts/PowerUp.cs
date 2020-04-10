@@ -1,5 +1,4 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
 
 [RequireComponent(typeof(SpriteRenderer))]
 [RequireComponent(typeof(Collider2D))]
@@ -9,7 +8,7 @@ public abstract class PowerUp : MonoBehaviour
 
     protected void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.layer == 9)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Paddle"))
         {
             ApplyPowerUp();
             Destroy(gameObject);
@@ -18,7 +17,7 @@ public abstract class PowerUp : MonoBehaviour
 
     protected void OnTriggerExit2D(Collider2D other)
     {
-        if (other.gameObject.layer == 11)
+        if (other.gameObject.layer == LayerMask.NameToLayer("Wall"))
         {
             Destroy(gameObject);
         }
