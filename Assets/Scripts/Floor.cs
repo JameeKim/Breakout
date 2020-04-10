@@ -7,8 +7,7 @@ public class Floor : MonoBehaviour
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Ball"))
         {
-            Destroy(other.gameObject);
-            GameController.Instance.BallFellDown();
+            GameController.Instance.BallManager.RemoveBall(other.gameObject.GetComponent<Ball>());
         }
     }
 }

@@ -4,6 +4,7 @@ using UnityEngine.Events;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
+[RequireComponent(typeof(BallManager))]
 public class GameController : MonoBehaviour
 {
     #region Singleton
@@ -33,7 +34,10 @@ public class GameController : MonoBehaviour
     public int levelNumber = 1;
 
     private int currentScore;
-    private readonly UnityEvent onLevelLoaded = new UnityEvent();
+
+    private BallManager ballManager;
+
+    public BallManager BallManager => ballManager;
 
     private void Awake()
     {
@@ -43,7 +47,8 @@ public class GameController : MonoBehaviour
         }
         instance = this;
 
-        onLevelLoaded.AddListener(OnLevelLoaded);
+        ballManager = GetComponent<BallManager>();
+        ballManager.onGameOver.AddListener(GameOver);
     }
 
     private void Start()
@@ -51,12 +56,7 @@ public class GameController : MonoBehaviour
         if (SceneManager.sceneCount < 2)
             StartCoroutine(LoadLevel());
         else
-            onLevelLoaded.Invoke();
-    }
-
-    private void OnDestroy()
-    {
-        onLevelLoaded.RemoveListener(OnLevelLoaded);
+            OnLevelLoaded();
     }
 
     public void IncrementScore()
@@ -65,10 +65,11 @@ public class GameController : MonoBehaviour
         scoreText.text = currentScore.ToString();
     }
 
-    public void BallFellDown()
+    public void GameOver()
     {
         StartCoroutine(nameof(ReloadLevel));
         ResetScore();
+        ballManager.ResetBalls();
         paddle.Reset();
     }
 
@@ -83,7 +84,7 @@ public class GameController : MonoBehaviour
         AsyncOperation loading = SceneManager.LoadSceneAsync(levelNumber, LoadSceneMode.Additive);
         while (!loading.isDone)
             yield return null;
-        onLevelLoaded.Invoke();
+        OnLevelLoaded();
     }
 
     private IEnumerator ReloadLevel()
