@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88410cabaaca4e628962250c4795bcac, type: 3}
+  m_Name: BrickSettings
+  m_EditorClassIdentifier: 
+  powerUpChance: 0.05
+  powerUps:
+  - {fileID: 6050067848777819325, guid: 42a54b2601a58074aa9dd78aef6b4812, type: 3}
+  - {fileID: 4907082289899598407, guid: 24941c4094899644887f6bf660db4a6f, type: 3}
+  - {fileID: 8121990049494957637, guid: f791e3d8678df2a46a42f1e96f7f02ac, type: 3}
