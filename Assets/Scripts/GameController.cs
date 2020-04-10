@@ -32,6 +32,15 @@ public class GameController : MonoBehaviour
     public Text laserCountText;
     public int levelNumber = 1;
 
+    [Header("Sound")]
+    public AudioSource brickSounds;
+
+    public AudioSource powerUpSounds;
+
+    public AudioSource laserSounds;
+
+    public AudioSource miscSounds;
+
     private int currentScore;
 
     private BallManager ballManager;

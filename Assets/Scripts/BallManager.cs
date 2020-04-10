@@ -12,6 +12,8 @@ public class BallManager : MonoBehaviour
 
     public GameObject ballPrefab;
 
+    public AudioClip splitSound;
+
     public UnityEvent onGameOver;
 
     private readonly List<Ball> balls = new List<Ball>();
@@ -72,6 +74,8 @@ public class BallManager : MonoBehaviour
         newRigidBody.velocity = rightDirection * ball.CurrentSpeed;
         Ball newBall = newBallObject.GetComponent<Ball>();
         newBall.CurrentSpeed = ball.CurrentSpeed;
+
+        GameController.Instance.powerUpSounds.PlayOneShot(splitSound);
     }
 
     public void ResetBalls()

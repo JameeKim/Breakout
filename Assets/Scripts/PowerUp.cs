@@ -5,12 +5,14 @@
 public abstract class PowerUp : MonoBehaviour
 {
     public float speed = 10.0f;
+    public AudioClip getSound;
 
     protected void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.layer == LayerMask.NameToLayer("Paddle"))
         {
             ApplyPowerUp();
+            GameController.Instance.powerUpSounds.PlayOneShot(getSound);
             Destroy(gameObject);
         }
     }

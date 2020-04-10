@@ -29,17 +29,22 @@ public class Brick : MonoBehaviour
 
     private void OnCollisionEnter2D(Collision2D other)
     {
+        AudioClip sound;
+
         if (CurrentHealth > 1)
+        {
+            sound = settings.ImpactAudioForHealth(CurrentHealth);
             CurrentHealth--;
+        }
         else
+        {
+            sound = settings.destroyAudio;
+            if (settings.RandomPowerUpByChance(out GameObject powerUp))
+                Instantiate(powerUp, transform.position, Quaternion.identity);
+            GameController.Instance.IncrementScore();
             Destroy(gameObject);
-    }
+        }
 
-    private void OnDestroy()
-    {
-        if (settings.RandomPowerUpByChance(out GameObject powerUp))
-            Instantiate(powerUp, transform.position, Quaternion.identity);
-
-        GameController.Instance.IncrementScore();
+        GameController.Instance.brickSounds.PlayOneShot(sound);
     }
 }

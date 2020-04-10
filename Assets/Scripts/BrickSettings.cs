@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using Random = UnityEngine.Random;
 
 [CreateAssetMenu(fileName = "BrickSettings", menuName = "New Brick Settings", order = 0)]
 public class BrickSettings : ScriptableObject
@@ -11,11 +13,19 @@ public class BrickSettings : ScriptableObject
 
     public GameObject[] powerUps;
 
-    public Color[] statusColors;
+    public BrickHealthStatus[] healthStatuses;
+
+    public AudioClip destroyAudio;
 
     private int streakWithoutPowerUp;
 
-    public Color ColorForHealth(int health) => statusColors[health - 1];
+    public Color ColorForHealth(int health) => healthStatuses[health - 1].color;
+
+    public AudioClip ImpactAudioForHealth(int health)
+    {
+        AudioClip[] audioClips = healthStatuses[health - 1].impactAudios;
+        return audioClips[Random.Range(0, audioClips.Length)];
+    }
 
     public bool RandomPowerUpByChance(out GameObject newGameObject)
     {
@@ -42,4 +52,11 @@ public class BrickSettings : ScriptableObject
     }
 
     private GameObject PickRandomPowerUp() => powerUps[Random.Range(0, powerUps.Length)];
+
+    [Serializable]
+    public struct BrickHealthStatus
+    {
+        public Color color;
+        public AudioClip[] impactAudios;
+    }
 }

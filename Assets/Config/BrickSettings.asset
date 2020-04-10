@@ -18,7 +18,26 @@ MonoBehaviour:
   - {fileID: 6050067848777819325, guid: 42a54b2601a58074aa9dd78aef6b4812, type: 3}
   - {fileID: 4907082289899598407, guid: 24941c4094899644887f6bf660db4a6f, type: 3}
   - {fileID: 8121990049494957637, guid: f791e3d8678df2a46a42f1e96f7f02ac, type: 3}
-  statusColors:
-  - {r: 0.734247, g: 0.92165494, b: 0.9433962, a: 1}
-  - {r: 0.5471698, g: 0.1742234, b: 0, a: 1}
-  - {r: 0.5279801, g: 0.5250534, b: 0.5377358, a: 1}
+  healthStatuses:
+  - color: {r: 0.734247, g: 0.92165494, b: 0.9433962, a: 1}
+    impactAudios:
+    - {fileID: 8300000, guid: ce564169da0eb7b4bb87083dc4edfb38, type: 3}
+    - {fileID: 8300000, guid: cf80d422b8106ee4c914370753f5f659, type: 3}
+    - {fileID: 8300000, guid: fb513f2c3ea9af74686810b789c801cd, type: 3}
+    - {fileID: 8300000, guid: 38a9b5e67317a6e4c945029a2f212993, type: 3}
+    - {fileID: 8300000, guid: f62506299fa5fb94b987c029f415ae95, type: 3}
+  - color: {r: 0.5471698, g: 0.1742234, b: 0, a: 1}
+    impactAudios:
+    - {fileID: 8300000, guid: 6259fb5ccc1f23a4daf59f8986f0c136, type: 3}
+    - {fileID: 8300000, guid: 8141bc8e67b48854f9c41a28d0e111bc, type: 3}
+    - {fileID: 8300000, guid: f5d44ec11d7e7174081ed69ddc627c4c, type: 3}
+    - {fileID: 8300000, guid: b69a2be2f7cb34f4386bc982654b50b3, type: 3}
+    - {fileID: 8300000, guid: d29b24e644e70014789538dd2357c4d2, type: 3}
+  - color: {r: 0.5279801, g: 0.5250534, b: 0.5377358, a: 1}
+    impactAudios:
+    - {fileID: 8300000, guid: 09a04ac776b51384296278f38b3f3e40, type: 3}
+    - {fileID: 8300000, guid: 53de96cfc9d405a43ad42f1f9ac1d4ad, type: 3}
+    - {fileID: 8300000, guid: 6093312225a030d4c8c7b358c4f45df6, type: 3}
+    - {fileID: 8300000, guid: 40887b28baa73dd4285fc1b825d9646c, type: 3}
+    - {fileID: 8300000, guid: 9bcd51cea1c92214db4dd3e003aff393, type: 3}
+  destroyAudio: {fileID: 8300000, guid: ed7959e2540b4b54aa91a8271dc1561c, type: 3}

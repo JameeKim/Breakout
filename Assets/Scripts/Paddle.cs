@@ -9,6 +9,12 @@ public class Paddle : MonoBehaviour
     public float height = 0.3f;
     public GameObject ballSpriteChild;
     public GameObject ballPrefab;
+    public AudioClip ballShootSound;
+
+    [Header("PowerUp - Grow")]
+    public AudioClip growSound;
+
+    public AudioClip shrinkSound;
 
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
@@ -50,6 +56,7 @@ public class Paddle : MonoBehaviour
 
         ballSpriteChild.SetActive(false);
         Instantiate(ballPrefab, ballSpriteChild.transform.position, Quaternion.identity);
+        GameController.Instance.miscSounds.PlayOneShot(ballShootSound);
     }
 
     public void Reset()
@@ -59,6 +66,7 @@ public class Paddle : MonoBehaviour
         Vector3 newPosition = cachedTransform.localPosition;
         newPosition.x = 0.0f;
         cachedTransform.localPosition = newPosition;
+        SetLaserShooter(null);
     }
 
     public void ResetWidthAfter(float duration)
@@ -74,21 +82,34 @@ public class Paddle : MonoBehaviour
         yield return new WaitForSeconds(duration);
         width = originalWidth;
         ApplySize();
+        GameController.Instance.powerUpSounds.PlayOneShot(shrinkSound);
         currentWidthReturnCoroutine = null;
     }
 
     public void SetLaserShooter(LaserShooter shooter)
     {
-        if (HasLaser)
+        if (!HasLaser)
         {
-            laserShooter.RefillLasers();
-            Destroy(shooter.gameObject);
+            if (shooter == null)
+                return;
+
+            laserShooter = shooter;
+            GameController.Instance.laserCountUI.SetActive(true);
+            laserShooter.IsAttachedToPaddle = true;
+
             return;
         }
 
-        laserShooter = shooter;
-        GameController.Instance.laserCountUI.SetActive(HasLaser);
-        if (HasLaser)
-            laserShooter.IsAttachedToPaddle = true;
+        if (shooter != null)
+        {
+            laserShooter.RefillLasers();
+            Destroy(shooter.gameObject);
+
+            return;
+        }
+
+        Destroy(laserShooter);
+        laserShooter = null;
+        GameController.Instance.laserCountUI.SetActive(false);
     }
 }

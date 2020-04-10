@@ -30,12 +30,6 @@ public class LaserShooter : MonoBehaviour
         timesLeft--;
         SetLaserCountText();
         if (timesLeft == 0)
-            Destroy(gameObject);
-    }
-
-    private void OnDestroy()
-    {
-        if (IsAttachedToPaddle)
             GameController.Instance.paddle.SetLaserShooter(null);
     }
 

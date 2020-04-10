@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 1
+  getSound: {fileID: 8300000, guid: e4c1e20d3ea11d040b433188b10acbb0, type: 3}
   laserShooterPrefab: {fileID: 1649999482954245480, guid: 75a0298128185fc42a2def4aef7a6928,
     type: 3}
 --- !u!1001 &2540366973658635000
