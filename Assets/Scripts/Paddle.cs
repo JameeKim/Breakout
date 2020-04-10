@@ -79,7 +79,16 @@ public class Paddle : MonoBehaviour
 
     public void SetLaserShooter(LaserShooter shooter)
     {
+        if (HasLaser)
+        {
+            laserShooter.RefillLasers();
+            Destroy(shooter.gameObject);
+            return;
+        }
+
         laserShooter = shooter;
-        GameController.Instance.laserCountUI.SetActive(laserShooter != null);
+        GameController.Instance.laserCountUI.SetActive(HasLaser);
+        if (HasLaser)
+            laserShooter.IsAttachedToPaddle = true;
     }
 }

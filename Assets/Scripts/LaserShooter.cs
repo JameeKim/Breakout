@@ -8,6 +8,8 @@ public class LaserShooter : MonoBehaviour
 
     private int timesLeft;
 
+    public bool IsAttachedToPaddle { get; set; }
+
     private void Awake()
     {
         timesLeft = totalTimesToShoot;
@@ -33,7 +35,14 @@ public class LaserShooter : MonoBehaviour
 
     private void OnDestroy()
     {
-        GameController.Instance.paddle.SetLaserShooter(null);
+        if (IsAttachedToPaddle)
+            GameController.Instance.paddle.SetLaserShooter(null);
+    }
+
+    public void RefillLasers()
+    {
+        timesLeft = totalTimesToShoot;
+        SetLaserCountText();
     }
 
     private void ShootLaser()
