@@ -11,7 +11,11 @@ public class BrickSettings : ScriptableObject
 
     public GameObject[] powerUps;
 
+    public Color[] statusColors;
+
     private int streakWithoutPowerUp;
+
+    public Color ColorForHealth(int health) => statusColors[health - 1];
 
     public bool RandomPowerUpByChance(out GameObject newGameObject)
     {

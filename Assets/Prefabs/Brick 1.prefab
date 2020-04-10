@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 2508718338720445375}
   - component: {fileID: -8152898809378825392}
   m_Layer: 10
-  m_Name: Brick
+  m_Name: Brick 1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -73,7 +73,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: dd88cafa242e95c468eca3b3bafbf62f, type: 3}
-  m_Color: {r: 0.5471698, g: 0.1742234, b: 0, a: 1}
+  m_Color: {r: 0.734247, g: 0.92165494, b: 0.9433962, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 2
@@ -122,3 +122,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   settings: {fileID: 11400000, guid: 233c1d61de2399e4d90291a9b339a985, type: 2}
+  maxHealth: 1
