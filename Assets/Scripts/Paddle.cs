@@ -13,10 +13,14 @@ public class Paddle : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private BoxCollider2D boxCollider;
 
+    // Power Up - Grow
     private float originalWidth;
     private Coroutine currentWidthReturnCoroutine;
-
     public float OriginalWidth => originalWidth;
+
+    // Power Up - Laser
+    private LaserShooter laserShooter;
+    public bool HasLaser => laserShooter != null;
 
     private void Awake()
     {
@@ -71,5 +75,11 @@ public class Paddle : MonoBehaviour
         width = originalWidth;
         ApplySize();
         currentWidthReturnCoroutine = null;
+    }
+
+    public void SetLaserShooter(LaserShooter shooter)
+    {
+        laserShooter = shooter;
+        GameController.Instance.laserCountUI.SetActive(laserShooter != null);
     }
 }
